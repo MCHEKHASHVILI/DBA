@@ -18,3 +18,9 @@ toDoList.forEach(item => console.log(item.id))
 /**
  * Create Todo List Functionality
  */
+
+// addItem
+// removeItem
+// renderTodoList
+
+// calculateNewItemId
