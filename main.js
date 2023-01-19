@@ -7,7 +7,13 @@ const toDoList = [
         id: 2,
         title: "second todo item"
     },
+    {
+        id: 3,
+        title: "second todo item"
+    },
 ]
+
+toDoList.forEach(item => console.log(item.id))
 
 /**
  * Create Todo List Functionality
