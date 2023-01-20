@@ -1,26 +1,62 @@
-const toDoList = [
-    {
-        id: 1,
-        title: "my todo item"
-    },
-    {
-        id: 2,
-        title: "second todo item"
-    },
-    {
-        id: 3,
-        title: "second todo item"
-    },
-]
+const toDoList = []
 
-toDoList.forEach(item => console.log(item.id))
+const $input = document.getElementsByTagName('input')[0]
+const $button = document.getElementsByTagName('button')[0]
+const $ul = document.getElementsByTagName('ul')[0]
 
-/**
- * Create Todo List Functionality
- */
+var id = toDoList.length + 1
 
-// addItem
-// removeItem
-// renderTodoList
+$button.addEventListener('click', addTodoItem)
 
-// calculateNewItemId
+function addTodoItem() {
+    let newInput = $input.value
+    if (validateInput(newInput)) {
+        let newItem = new Object() // {}
+        newItem.id = id
+        id++
+        newItem.title = $input.value
+        toDoList.push(newItem)
+        $input.value = null
+        renderTodoList()
+    } else {
+        console.log('The input must be filled')
+    }
+}
+
+function deleteTodoItem(id) {
+    deleteTodoItemFromtoDoList(id)
+    renderTodoList()
+}
+
+function renderTodoList() {
+
+    $ul.innerHTML = null
+
+    toDoList.forEach(item => {
+        let li = document.createElement('li')
+        li.innerHTML = item.title + " ID: " + item.id + " - "
+        let delButton = document.createElement('button')
+        delButton.innerHTML = "Delete"
+        delButton.addEventListener('click', () => {
+            deleteTodoItem(item.id)
+        })
+        li.appendChild(delButton)
+        $ul.appendChild(li)
+    }
+    )
+}
+
+function deleteTodoItemFromtoDoList(id) {
+    let item = toDoList.find(value => value.id === id)
+    toDoList.splice(toDoList.indexOf(item), 1)
+}
+
+function validateInput(value) {
+    if(value !== ''){
+        return true
+    }else{
+        return false
+    }
+}
+
+renderTodoList()
